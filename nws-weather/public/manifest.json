@@ -1,0 +1,17 @@
+{
+  "label": "National Weather Service Weather",
+  "isAudioSource": false,
+  "isScreenSaver": false,
+  "isWebApp": true,
+  "requires": [],
+  "version": "0.10.6",
+  "description": "None",
+  "author": "dawbanc",
+  "platforms": [
+    "linux"
+  ],
+  "homepage": "",
+  "repository": "",
+  "id": "nws-weather",
+  "template": "full"
+}
