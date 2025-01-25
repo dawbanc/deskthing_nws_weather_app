@@ -1,6 +1,6 @@
 import { DeskThing } from "deskthing-server"
 
-async function getWeather(latitude: number, longitude: number) {
+export async function getWeather(latitude: number, longitude: number): Promise<string> {
     const uri = 'https://api.weather.gov/points/${latitude},${longitude}'; // weather.gov API for lat/long
     this.deskthing.sendLog('Fetching data from weather.gov for ${latitude}, ${longitude}');
     const response = await fetch(uri); // fetch data from weather.gov
@@ -9,4 +9,5 @@ async function getWeather(latitude: number, longitude: number) {
     }
     const data = response.json();
     this.deskthing.sendLog(JSON.stringify(data, null, 2));
+    return data;
 }
