@@ -1,24 +1,8 @@
-/**
- * Welcome to the template app!
- *
- * This app is meant for developers to be able to reference while making their own apps. Nearly ever DeskThing feature is outlined here in some capacity to demonstrate the practical application of building an app for DeskThing!
- * Any questions, please join the discord server channel and ask there.
- *
- */
-
-/**
- * There are two connectors. DeskThing-server and DeskThing-client
- * To optimize your app, only use DeskThing-server inside the server and DeskThing-client inside the client
- *
- * Every app must both import DeskThing-server and export DeskThing-server to allow the DeskThing Server to link with your app
- */
 import { DeskThing, SocketData } from "deskthing-server";
-// Doing this is required in order for the server to link with DeskThing
 export { DeskThing };
 
-// The following imports are from other files that setup their own functions
 import { setupSettings } from "./settings";
-import { userInput } from "./userInput";
+//import { getWeather } from "./weather"; // TODO: uncomment when done 
 import { sendImage, sendSampleData } from "./sendingData";
 
 /**
@@ -40,7 +24,6 @@ const start = async () => {
   const Data = await DeskThing.getData();
 
   setupSettings(Data);
-  userInput(Data);
     // This will make Data.settings.theme.value equal whatever the user selects
 };
 
