@@ -2,11 +2,11 @@ import { DeskThing, SocketData } from "deskthing-server";
 export { DeskThing };
 
 import { setupSettings } from "./settings";
-import { getWeather } from "./weather"; 
+import { WeatherData, getWeather } from "./weather"; 
 import { sendImage, sendSampleData } from "./sendingData";
 
 const start = async () => {
-  const Data = await DeskThing.getData();
+  let Data = await DeskThing.getData();
   setupSettings(Data);
 };
 
@@ -15,8 +15,8 @@ const stop = async () => {
 };
 
 const handleRequest = async () => {
-  const data = getWeather(38.89, -77.02);
-  console.log(data);
+  const data = await getWeather(38.89, -77.02);
+  DeskThing.sendLog(JSON.stringify(data, null, 2));
 }
 
 // Main Entrypoint of the server
@@ -25,6 +25,7 @@ DeskThing.on("start", start);
 // Main exit point of the server
 DeskThing.on("stop", stop);
 
+DeskThing.sendLog('Trying request');
 DeskThing.on('get', handleRequest);
 
 
