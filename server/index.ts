@@ -18,23 +18,20 @@ const start = async () => {
   let settingsData = await DeskThing.getData();
   await setupSettings(settingsData);
 
-  //const settings = await DeskThing.getSettings();
   let settings: AppSettings | null = await DeskThing.getSettings();
+  let settingsParse = await JSON.parse(JSON.stringify(settings));
 
-  //DeskThing.sendLog(JSON.stringify(settings, null, 2));
-  //DeskThing.sendLog(settings["latitude"]);
-  if (settings != null) {
-    DeskThing.sendLog("Tests: ");
-    DeskThing.sendLog(JSON.stringify(settings["latitude"]));
-    DeskThing.sendLog(JSON.stringify(settings["longitude"]));
-    DeskThing.sendLog(JSON.stringify(settings["temperature_scale"]));
-    DeskThing.sendLog(JSON.stringify(settings["wind_speed_scale"]));
-  } else {
-    DeskThing.sendLog("SETTINGS is NULL");
-  }
-  
+  if (settingsParse == null) {
+    DeskThing.sendLog("SETTINGS returned NULL");
+  } 
 
-  //const weatherData = await getWeather(settings[latitude], settings.longitude);
+  let latitude = settingsParse.latitude.value;
+  let longitude = settingsParse.longitude.value;
+  let temperature_scale = settingsParse.temperature_scale.value;
+  let wind_speed_scale = settingsParse.wind_speed_scale.value;
+
+  let weatherData = await getWeather(latitude, longitude);
+  DeskThing.sendLog(JSON.stringify(weatherData));
 };
 
 // Main Entrypoint of the server

@@ -24,12 +24,12 @@ export interface WeatherData {
 
   export async function getWeather(latitude: number, longitude: number): Promise<WeatherData | null> {
     try {
-      const uri = `https://api.weather.gov/points/${latitude},${longitude}`;
-      DeskThing.sendLog(uri);
-      const response = await fetch(uri); 
+      const general_uri = `https://api.weather.gov/points/${latitude},${longitude}`;
+      DeskThing.sendLog(general_uri);
+      const response = await fetch(general_uri); 
 
       if (!response.ok) {
-        DeskThing.sendLog(`HTTP error ${response.status}`);
+        DeskThing.sendLog(`General NWS HTTP error: ${response.status}`);
         return null; // Return null to indicate failure
       }
   
