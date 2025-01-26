@@ -7,8 +7,8 @@ import { DeskThing, DataInterface, SettingsType } from "deskthing-server";
  */
 export const setupSettings = async (Data: DataInterface | null) => {
 
-  const api_uri = await fetch('https://api.weather.gov/points/lat,long}');
-  const { lat, long } = await api_uri.json();
+  const api_uri = await fetch('http://ip-api.com/json/?fields=lat,lon');
+  const { lat, lon } = await api_uri.json();
 
   // We require Latitude and Longitude so we can get data from nearby
   // Temperature scale sets whether we will send celcius or freedom units to the deskthing client
@@ -36,7 +36,7 @@ export const setupSettings = async (Data: DataInterface | null) => {
       },
       longitude: {
         label: "Longitude",
-        value: long,
+        value: lon,
         description: "Longitude of weather data point you wish",
         type: 'number',
         min: -180,
