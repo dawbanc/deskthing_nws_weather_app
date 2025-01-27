@@ -7,7 +7,7 @@ export interface WeatherData {
     wind_speed_scale: string;
     //temperature_high: number;                                         // NWS doesn't natively supply daily highs/lows
     //temperature_low: number;                                          // I will need to approximate manually
-    humitidity: number;
+    humitidity: string;
   }
 
 export async function getWeather(latitude: number, longitude: number): Promise<WeatherData | null> {
@@ -31,15 +31,17 @@ export async function getWeather(latitude: number, longitude: number): Promise<W
     let stationsURI = observationData.observationStations[0];           // We can then extract out the URLs for the nearby stations
     stationsURI += "/observations/latest";                              // We need to get the observations from that station
     const stationResponse = await fetch(stationsURI);    
-    //DeskThing.sendLog(JSON.stringify(stationResponse));
+    //DeskThing.sendLog(JSON.stringify(stationsURI));
     const stationData = await stationResponse.json();                   
+
+    const roundedHumidity: string = stationData.properties.relativeHumidity.value.toFixed(2);
 
     const ourWeatherData : WeatherData = {
       temperature: stationData.properties.temperature.value,
       temperature_scale: stationData.properties.temperature.unitCode,
       wind_speed: stationData.properties.windSpeed.value,
       wind_speed_scale: stationData.properties.windSpeed.unitCode,
-      humitidity: stationData.properties.relativeHumidity.value,
+      humitidity: roundedHumidity,
     }; 
 
     return ourWeatherData as WeatherData;                                         // Type assertion after checking response.ok
