@@ -17,13 +17,16 @@ const stop = async () => {
 const start = async () => {
   let settingsData = await DeskThing.getData();
   await setupSettings(settingsData);
+  
+};
 
+setInterval(async () => {
   let settings: AppSettings | null = await DeskThing.getSettings();
   let settingsParse = await JSON.parse(JSON.stringify(settings));
 
   if (settingsParse == null) {
     DeskThing.sendLog("SETTINGS returned NULL");
-  } 
+  }
 
   let latitude = settingsParse.latitude.value;
   let longitude = settingsParse.longitude.value;
@@ -32,7 +35,8 @@ const start = async () => {
 
   let weatherData = await getWeather(latitude, longitude);
   DeskThing.sendLog(JSON.stringify(weatherData));
-};
+  DeskThing.send({type: "weatherData", payload: JSON.stringify(weatherData)});
+}, 30000);
 
 // Main Entrypoint of the server
 DeskThing.on("start", start);
