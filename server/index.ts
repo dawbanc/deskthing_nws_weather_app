@@ -31,7 +31,7 @@ const start = async () => {
   let wind_speed_scale = settingsParse.wind_speed_scale.value;
 
   let weatherData = await getWeather(latitude, longitude);
-  DeskThing.sendLog(JSON.stringify(weatherData));
+  //DeskThing.sendLog(JSON.stringify(weatherData));
 };
 
 // Main Entrypoint of the server
