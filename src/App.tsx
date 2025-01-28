@@ -7,26 +7,6 @@ const App: React.FC = () => {
     const [weatherData, setWeatherData] = useState<string | null>(null);
 
     useEffect(() => {
-        // const onAppData = async (data: SocketData) => {
-        //     console.log('Received data from the server!')
-        //     console.log(data.app)
-        //     console.log(data.payload)
-        //     test = data.payload;
-        // }
-
-
-        //const removeListener = DeskThing.on('data', onAppData)
-        //DeskThing.on('')
-
-        // const unsubscribe = DeskThing.on('weatherData', (data) => {
-        //     setWeatherData(JSON.stringify(data.payload));
-        // });
-
-        // DeskThing.on('weatherData', (data) => {
-        //     console.log("MY NWS DATA:")
-        //     console.log(data.payload);
-        //     test = JSON.stringify(data.payload);
-        // })
 
         const onWeatherData = async (data: SocketData) => {
             console.log('Received data from the server!')
@@ -38,8 +18,6 @@ const App: React.FC = () => {
         const listener = DeskThing.on('weatherData', onWeatherData);
 
         return () => {
-            //removeListener()
-            //unsubscribe();
             listener();
         }
     })
