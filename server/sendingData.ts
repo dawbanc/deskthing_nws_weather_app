@@ -11,7 +11,7 @@ export const sendWeather = async () => {
     let wind_speed_scale = settingsParse.wind_speed_scale.value;
 
     let weatherData = await getWeather(latitude, longitude);
-    DeskThing.sendLog(JSON.stringify(weatherData));
+    //DeskThing.sendLog(JSON.stringify(weatherData));
     DeskThing.send({type: "weatherData", payload: JSON.stringify(weatherData)});
 }
 
