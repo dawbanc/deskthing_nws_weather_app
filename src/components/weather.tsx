@@ -1,5 +1,3 @@
-
-
 export type WeatherData {
   temperature: number;
   temperature_scale: string;
