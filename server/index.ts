@@ -18,7 +18,7 @@ const start = async () => {
   sendWeather();
 
   runEveryMin(sendDate);
-  runEveryMin(sendWeather); // to debug
+  runEveryMin(sendWeather); // to debug change to hour once done debugging
 };
 
 // Main Entrypoint of the server
