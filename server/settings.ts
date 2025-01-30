@@ -49,6 +49,7 @@ export const setupSettings = async (Data: DataInterface | null) => {
         options: [
           { label: "Fahrenheit", value: "°F" },
           { label: "Celcius", value: "°C" },
+          { label: "Kelvin", value: "K" },
         ],
       },
       wind_speed_scale: {
