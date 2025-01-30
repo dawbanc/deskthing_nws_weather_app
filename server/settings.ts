@@ -61,6 +61,15 @@ export const setupSettings = async (Data: DataInterface | null) => {
           { label: "Kilometers Per Hour", value: "km/h"}
         ]
       },
+      time_format: {
+        label: "Time Format",
+        value: "12",
+        type: "select",
+        options: [
+          { label: "12 Hr", value: "12" },
+          { label: "24 Hr", value: "24" },
+        ]
+      },
     };
 
     // This adds the settings to the server. When the user changes a setting, the 'data' callback is triggered

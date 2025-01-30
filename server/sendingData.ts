@@ -45,15 +45,24 @@ export const sendWeather = async () => {
 }
 
 export const sendDate = async () => {
-    //let settings: AppSettings | null = await DeskThing.getSettings();
-    //let settingsParse = await JSON.parse(JSON.stringify(settings));
+    let settings: AppSettings | null = await DeskThing.getSettings();
+    let settingsParse = await JSON.parse(JSON.stringify(settings));
 
-    // TODO: use settings to allow for 12 hour or 24 hour format
+    let format = settingsParse.time_format.value;
+    
     const now = new Date();
+    let ampm = "";
 
-    const hours = now.getHours();
+    let hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, '0');
-    const time_string: string = hours + ":" + minutes;
+
+    if (format === "12") {
+        ampm = hours >= 12 ? " PM" : " AM"; // before modifying hours, check the AM/PM
+        hours = hours % 12;
+        hours = hours || 12; // handle midnight (or hour 0)
+    }
+
+    const time_string: string = hours + ":" + minutes + ampm;
 
     DeskThing.sendLog("Sending Date/Time");
     DeskThing.send({type: "dateData", payload: time_string})
