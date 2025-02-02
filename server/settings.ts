@@ -49,6 +49,7 @@ export const setupSettings = async (Data: DataInterface | null) => {
         options: [
           { label: "Fahrenheit", value: "°F" },
           { label: "Celcius", value: "°C" },
+          { label: "Kelvin", value: "K" },
         ],
       },
       wind_speed_scale: {
@@ -58,6 +59,15 @@ export const setupSettings = async (Data: DataInterface | null) => {
         options: [
           { label: "Miles Per Hour", value: "MPH" },
           { label: "Kilometers Per Hour", value: "km/h"}
+        ]
+      },
+      time_format: {
+        label: "Time Format",
+        value: "12",
+        type: "select",
+        options: [
+          { label: "12 Hr", value: "12" },
+          { label: "24 Hr", value: "24" },
         ]
       },
     };
