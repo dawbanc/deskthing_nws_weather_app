@@ -14,13 +14,16 @@ const start = async () => {
   let settingsData = await DeskThing.getData();
   await setupSettings(settingsData);
   
-  // Wait ten seconds after initialization to send the first set of data
-  await setTimeout(() => {}, 10000);
-  sendDate();
-  sendWeather();
+  // Wait 10 seconds after initialization to send the first set of data
+  setTimeout(() => {
+    sendDate();
+    sendWeather();
+  }, 10000);
+  
 
   runEveryMin(sendDate);
-  runEveryMin(sendWeather); // to debug change to hour once done debugging
+  //runEveryMin(sendWeather); // TODO: change to hour once done debugging
+  runEveryHour(sendWeather);
 };
 
 const update = async () => {
