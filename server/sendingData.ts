@@ -1,5 +1,6 @@
 import { DeskThing, AppSettings } from "deskthing-server"
 import { getWeather, ParsedWeatherData } from "./weather"
+import { ParsedDateData } from "./date";
 
 export const sendWeather = async () => {
     let settings: AppSettings | null = await DeskThing.getSettings();
@@ -31,12 +32,11 @@ export const sendWeather = async () => {
         } else {
             temp_int = temp_int + 273.15;
         }
-
         const final_temp: string = Math.floor(temp_int) + " " + temperature_scale;
 
         const data_to_send: ParsedWeatherData = { // placeholder while I develop this
             temperature: final_temp,
-            humidity:  "43%",
+            humidity:  weatherData.humitidity + "%",
             wind: "10mph NW",
         }
         //DeskThing.sendLog(JSON.stringify(weatherData));
@@ -50,6 +50,8 @@ export const sendDate = async () => {
 
     let format = settingsParse.time_format.value;
     
+
+
     const now = new Date();
     let ampm = "";
 
@@ -64,6 +66,11 @@ export const sendDate = async () => {
 
     const time_string: string = hours + ":" + minutes + ampm;
 
+    const data_to_send: ParsedDateData = {
+        time: time_string,
+        date: "1/20/25",
+    }
+
     DeskThing.sendLog("Sending Date/Time");
-    DeskThing.send({type: "dateData", payload: time_string})
+    DeskThing.send({type: "dateData", payload: JSON.stringify(data_to_send)})
 }

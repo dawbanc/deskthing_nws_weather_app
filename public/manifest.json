@@ -10,8 +10,8 @@
   "platforms": [
     "linux"
   ],
-  "homepage": "",
-  "repository": "",
+  "homepage": "https://github.com/dawbanc/deskthing_nws_weather_app",
+  "repository": "https://github.com/dawbanc/deskthing_nws_weather_app",
   "id": "nws-weather",
   "template": "full"
 }
