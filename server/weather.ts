@@ -7,6 +7,7 @@ export interface WeatherData {
   wind_speed_scale: string;
   wind_direction: string;
   humitidity: string;
+  time: string;
 }
 
 export interface ParsedWeatherData {
@@ -48,6 +49,9 @@ export async function getWeather(latitude: number, longitude: number): Promise<W
 
     const roundedHumidity: string = stationData.properties.relativeHumidity.value.toFixed(2);
 
+    const now = new Date();
+    const dateString = now.toISOString();
+
     const ourWeatherData : WeatherData = {
       temperature: stationData.properties.temperature.value,
       temperature_scale: stationData.properties.temperature.unitCode,
@@ -55,6 +59,7 @@ export async function getWeather(latitude: number, longitude: number): Promise<W
       wind_speed_scale: stationData.properties.windSpeed.unitCode,
       wind_direction: degreesToCardinal(stationData.properties.windDirection.value),
       humitidity: roundedHumidity,
+      time: dateString,
     }; 
 
     return ourWeatherData as WeatherData;                                         // Type assertion after checking response.ok

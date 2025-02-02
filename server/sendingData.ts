@@ -56,11 +56,14 @@ export const sendWeather = async () => {
         }
         const final_wind: string = Math.floor(wind_int) + " " + wind_speed_scale + " " + weatherData.wind_direction;
 
+        // -------------------------------------------------------------------------------------------
+        // DATA COLLECTION
+        // -------------------------------------------------------------------------------------------
         const data_to_send: ParsedWeatherData = { // placeholder while I develop this
             temperature: final_temp,
             humidity:  weatherData.humitidity + "%",
             wind: final_wind,
-            last_updated: "10PM",
+            last_updated: weatherData.time,
         }
         //DeskThing.sendLog(JSON.stringify(weatherData));
         DeskThing.send({type: "weatherData", payload: JSON.stringify(data_to_send)});

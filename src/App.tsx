@@ -6,6 +6,7 @@ const App: React.FC = () => {
     const [temperature_data, setTemperatureData] = useState <string | null>(null);
     const [time_data, setTimeData] = useState<string | null>(null);
     const [date_data, setDateData] = useState<string | null>(null);
+    const [last_updated, setLastUpdated] = useState<string | null>(null);
 
     useEffect(() => {
 
@@ -14,6 +15,7 @@ const App: React.FC = () => {
             try {
                 const parsed_weather_data = JSON.parse(data.payload);
                 setTemperatureData(parsed_weather_data.temperature);
+                setLastUpdated(parsed_weather_data.last_updated);
             } catch (error) {
                 console.error("Error parsing weather JSON:", error);
             }
@@ -54,8 +56,15 @@ const App: React.FC = () => {
                 </div>
             </div>
             <div className="flex-grow flex justify-center items-center"> </div> 
-            <div className="text-white text-xl p-4">
-                NWS-Weather
+            <div className="flex justify-between items-end p-4">
+                <div className="text-white text-xl">
+                    NWS-Weather App
+                </div>
+                <div className="text-white text-sm">
+                {last_updated && (
+                    <span>Last Updated: {last_updated}</span>
+                )}
+                </div>
             </div>
         </div>
     )
