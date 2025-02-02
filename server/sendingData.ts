@@ -14,9 +14,11 @@ export const sendWeather = async () => {
     let weatherData = await getWeather(latitude, longitude);
 
     if (weatherData != null) {
+        
+        // -------------------------------------------------------------------------------------------
+        // TEMPERATURE CALC
+        // -------------------------------------------------------------------------------------------
         let temp_int = weatherData.temperature;
-        let temp_scale = "";
-
         // If the temperature is in C, leave it alone. Otherwise convert it to C
         if (weatherData.temperature_scale === "wmoUnit:degC") {
             temp_int = temp_int;
@@ -34,10 +36,31 @@ export const sendWeather = async () => {
         }
         const final_temp: string = Math.floor(temp_int) + " " + temperature_scale;
 
+        // -------------------------------------------------------------------------------------------
+        // WIND CALC
+        // -------------------------------------------------------------------------------------------
+        let wind_int = weatherData.wind_speed;
+        
+        // If speed is in mph, convert it to km/hr
+        if (weatherData.wind_speed_scale === "wmoUnit:km_h-1") {
+            wind_int = wind_int;
+        } else {
+            wind_int = wind_int * 1.60934; 
+        }
+
+        // Convert speed to what the user specified in settings
+        if (wind_speed_scale === "MPH") {
+            wind_int = wind_int * 0.621371;
+        } else {
+            wind_int = wind_int;
+        }
+        const final_wind: string = Math.floor(wind_int) + " " + wind_speed_scale + " " + weatherData.wind_direction;
+
         const data_to_send: ParsedWeatherData = { // placeholder while I develop this
             temperature: final_temp,
             humidity:  weatherData.humitidity + "%",
-            wind: "10mph NW",
+            wind: final_wind,
+            last_updated: "10PM",
         }
         //DeskThing.sendLog(JSON.stringify(weatherData));
         DeskThing.send({type: "weatherData", payload: JSON.stringify(data_to_send)});

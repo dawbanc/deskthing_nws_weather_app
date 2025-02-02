@@ -15,7 +15,7 @@ const start = async () => {
   await setupSettings(settingsData);
   
   // Wait one second after initialization to send the first set of data
-  setTimeout(() => {}, 1000);
+  await setTimeout(() => {}, 1000);
   sendDate();
   sendWeather();
 

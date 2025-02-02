@@ -5,6 +5,7 @@ export interface WeatherData {
   temperature_scale: string;
   wind_speed: number;
   wind_speed_scale: string;
+  wind_direction: string;
   humitidity: string;
 }
 
@@ -12,6 +13,17 @@ export interface ParsedWeatherData {
   temperature: string;
   humidity: string;
   wind: string;
+  last_updated: string;
+}
+
+function degreesToCardinal(degrees: number): string {
+  const directions = [
+    "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", 
+    "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" 
+  ]; 
+
+  const index = Math.round((degrees % 360) / 22.5); 
+  return directions[index]; 
 }
 
 export async function getWeather(latitude: number, longitude: number): Promise<WeatherData | null> {
@@ -41,6 +53,7 @@ export async function getWeather(latitude: number, longitude: number): Promise<W
       temperature_scale: stationData.properties.temperature.unitCode,
       wind_speed: stationData.properties.windSpeed.value,
       wind_speed_scale: stationData.properties.windSpeed.unitCode,
+      wind_direction: degreesToCardinal(stationData.properties.windDirection.value),
       humitidity: roundedHumidity,
     }; 
 
