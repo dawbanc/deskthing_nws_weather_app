@@ -26,7 +26,7 @@ Things I would like to display:
 
 ## Installation
 
-Current release (v1.x.x) was created on v0.10.3 of the deskthing app and v0.10.2 of the client. It is recommended to use these versions or newer. 
+Current release (v0.1.x) was created on v0.10.3 of the deskthing app and v0.10.2 of the client. It is recommended to use these versions or newer. 
 
 Download the release file, (.zip). Then in the DeskThing app, you can click on downloads, then Upload App.
 Navigate to the .zip file downloaded, then select Open. 
