@@ -14,8 +14,8 @@ const start = async () => {
   let settingsData = await DeskThing.getData();
   await setupSettings(settingsData);
   
-  // Wait one second after initialization to send the first set of data
-  await setTimeout(() => {}, 1000);
+  // Wait ten seconds after initialization to send the first set of data
+  await setTimeout(() => {}, 10000);
   sendDate();
   sendWeather();
 
