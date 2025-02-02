@@ -8,6 +8,10 @@ export interface WeatherData {
   wind_direction: string;
   humitidity: string;
   time: string;
+  temperature_high: number;                                             // temp his and lows for the day
+  temperature_high_scale: string;                                       // I would think the scale would be the same, but ya never know
+  temperature_low: number;
+  temperature_low_scale: string;
 }
 
 export interface ParsedWeatherData {
@@ -60,9 +64,13 @@ export async function getWeather(latitude: number, longitude: number): Promise<W
       wind_direction: degreesToCardinal(stationData.properties.windDirection.value),
       humitidity: roundedHumidity,
       time: dateString,
+      temperature_high: 72,
+      temperature_high_scale: "celcius",
+      temperature_low: -2,
+      temperature_low_scale: "celcius",
     }; 
 
-    return ourWeatherData as WeatherData;                                         // Type assertion after checking response.ok
+    return ourWeatherData as WeatherData;                               // Type assertion after checking response.ok
   } catch (error) {
       DeskThing.sendLog(error);
     return null;                                                        // Return null in case of any error
