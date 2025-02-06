@@ -97,6 +97,6 @@ export const sendDate = async () => {
         date: "1/20/25",
     }
 
-    DeskThing.sendLog("Sending Date/Time");
+    //DeskThing.sendLog("Sending Date/Time");
     DeskThing.send({type: "dateData", payload: JSON.stringify(data_to_send)})
 }

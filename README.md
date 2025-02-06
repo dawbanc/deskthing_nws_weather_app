@@ -1,7 +1,9 @@
 # deskthing_nws_weather_app
 Deskthing: National Weather Service Weather App 
 
-A fork of Riprod's weather app (https://github.com/ItsRiprod/Deskthing-Apps/tree/master/weather) that uses the NWS api instead of OpenMeteo API to get more accurate weather information in the US.
+A fork of Riprod's weather app (https://github.com/ItsRiprod/Deskthing-Apps/tree/master/weather) that uses the National Weather Service (NWS) api instead of OpenMeteo API to get more accurate weather information in the US.
+
+The app requests data from NWS at the load as well as at the top of the hour.
 
 NOTE: AFAIK this app will only work for weather data within the US. 
 

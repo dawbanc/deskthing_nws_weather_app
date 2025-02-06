@@ -7,13 +7,11 @@ import { runEveryMin, runEveryHour } from "./time";
 import { sendDate, sendWeather } from "./sendingData";
 
 const handleRequest = async (request: SocketData) => {
-  DeskThing.sendLog('Request recieved: ' + request.request);
-  update();
-  // if (request.request === "weatherData") {
-  //   sendWeather();
-  // } else if (request.request === "timeData") {
-  //   sendDate();
-  // }
+  if (request.request === "weatherData") {
+    sendWeather();
+  } else if (request.request === "timeData") {
+    sendDate();
+  }
 };
 
 const stop = async () => {
@@ -24,13 +22,6 @@ const start = async () => {
   let settingsData = await DeskThing.getData();
   await setupSettings(settingsData);
   
-  // Wait 10 seconds after initialization to send the first set of data
-  setTimeout(() => {
-    sendDate();
-    sendWeather();
-  }, 10000);
-
-
   runEveryMin(sendDate);
   //runEveryMin(sendWeather); // TODO: change to hour once done debugging
   runEveryHour(sendWeather);
@@ -51,9 +42,6 @@ DeskThing.on('get', handleRequest);
 
 // on stop
 DeskThing.on('stop', stop);
-
-// On settings change? testing
-//DeskThing.on('settings', update);
 
 // Main Entrypoint of the server
 DeskThing.on("start", start);
