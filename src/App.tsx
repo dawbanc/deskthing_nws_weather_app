@@ -39,6 +39,17 @@ const App: React.FC = () => {
         const weatherListener = DeskThing.on('weatherData', onWeatherData);
         const dateListener = DeskThing.on('dateData', onDateData);
 
+        // If data is null, send a request
+        // if (temperature_data === null) {
+        //     DeskThing.send({type: 'get', payload: 'weatherData'});
+        // }
+        // if (time_data === null) {
+        //     DeskThing.send({type: 'get', payload: 'timeData'});
+        // }
+        DeskThing.send({type: 'get', payload: 'weatherData'});
+        //DeskThing.send({type: 'get', payload: 'timeData'});
+
+
         return () => {
             weatherListener();
             dateListener();

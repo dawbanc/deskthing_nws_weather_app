@@ -6,8 +6,18 @@ import { WeatherData, getWeather } from "./weather";
 import { runEveryMin, runEveryHour } from "./time";
 import { sendDate, sendWeather } from "./sendingData";
 
+const handleRequest = async (request: SocketData) => {
+  DeskThing.sendLog('Request recieved: ' + request.request);
+  update();
+  // if (request.request === "weatherData") {
+  //   sendWeather();
+  // } else if (request.request === "timeData") {
+  //   sendDate();
+  // }
+};
+
 const stop = async () => {
-  DeskThing.sendLog('Server Stopped');
+  DeskThing.sendLog('NWS Server Stopped');
 };
 
 const start = async () => {
@@ -19,7 +29,7 @@ const start = async () => {
     sendDate();
     sendWeather();
   }, 10000);
-  
+
 
   runEveryMin(sendDate);
   //runEveryMin(sendWeather); // TODO: change to hour once done debugging
@@ -36,6 +46,10 @@ const update = async () => {
   sendWeather();
 };
 
+// on any get, update
+DeskThing.on('get', handleRequest);
+
+// on stop
 DeskThing.on('stop', stop);
 
 // On settings change? testing
