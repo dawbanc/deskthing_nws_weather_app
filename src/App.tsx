@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { DeskThing, SocketData } from 'deskthing-client'
 
 const App: React.FC = () => {
@@ -9,6 +9,7 @@ const App: React.FC = () => {
     const [last_updated, setLastUpdated] = useState<string | null>(null);
     const [humidity, setHumidity] = useState<string | null>(null);
     const [wind, setWind] = useState<string | null>(null);
+    const lastUpdate = useRef(0);
 
     useEffect(() => {
 
@@ -38,6 +39,15 @@ const App: React.FC = () => {
 
         const weatherListener = DeskThing.on('weatherData', onWeatherData);
         const dateListener = DeskThing.on('dateData', onDateData);
+
+        const getUpdate = () => {
+            const currentTime = Date.now();
+            if (currentTime - lastUpdate.current >= 1000) {
+                DeskThing.send({type: 'get', request: 'update'});
+                lastUpdate.current = currentTime;
+            }
+        }
+        getUpdate();    // Get initial values at load
 
         return () => {
             weatherListener();
