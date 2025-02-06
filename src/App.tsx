@@ -47,8 +47,10 @@ const App: React.FC = () => {
                 lastUpdate.current = currentTime;
             }
         }
-        getUpdate();    // Get initial values at load
-
+        if ((temperature_data === null) || (time_data === null)) {
+            getUpdate();    // Get initial values at load
+        }
+        
         return () => {
             weatherListener();
             dateListener();
