@@ -24,7 +24,9 @@ Things I would like to display:
 - Feels Like Data
 - Forcast
 - Generally make the data prettier
+- Photos to Github/Discord Post
 - Album Art
+- Different Layouts to Highlight Different Things
 
 ## Installation
 

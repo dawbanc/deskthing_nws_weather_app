@@ -7,10 +7,11 @@ import { runEveryMin, runEveryHour } from "./time";
 import { sendDate, sendWeather } from "./sendingData";
 
 const handleRequest = async (request: SocketData) => {
-  if (request.request === "weatherData") {
-    sendWeather();
-  } else if (request.request === "timeData") {
-    sendDate();
+  if (request.request === "update") {
+    await sendDate();
+    await sendWeather();
+  } else {
+    DeskThing.sendLog("Unknown request: " + request.request);
   }
 };
 
@@ -33,8 +34,7 @@ const update = async () => {
   let settingsData = await DeskThing.getData();
   await setupSettings(settingsData);
 
-  sendDate();
-  sendWeather();
+  
 };
 
 // on any get, update
