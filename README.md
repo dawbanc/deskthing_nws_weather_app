@@ -43,7 +43,17 @@ As I am still playing around with this to get the formatting right, please don't
 
 If you change settings while in the app, you may need to refresh it to see the changes. Choose a different app then come back to NWS-Weather and the changes should take place. 
 
-## Resources
+## Building from Source
+
+#### Linux
+```
+git clone https://github.com/dawbanc/deskthing_nws_weather_app.git
+cd deskthing_nws_weather_app
+npm i
+npm run build
+```
+
+## Acknowledgments and Resources
 
 This was made thanks to all Riprod's hard work on the Deskthing app:    https://github.com/ItsRiprod/DeskThing
 The template I used is summarized in another one of their repos:        https://github.com/ItsRiprod/deskthing-template
