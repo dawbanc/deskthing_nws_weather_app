@@ -1,10 +1,11 @@
 {
+  "id": "nws-weather",
   "label": "National Weather Service Weather",
   "isAudioSource": false,
   "isScreenSaver": false,
   "isWebApp": true,
   "requires": [],
-  "version": "0.10.6",
+  "version": "0.10.3",
   "description": "None",
   "author": "dawbanc",
   "platforms": [
@@ -12,6 +13,5 @@
   ],
   "homepage": "https://github.com/dawbanc/deskthing_nws_weather_app",
   "repository": "https://github.com/dawbanc/deskthing_nws_weather_app",
-  "id": "nws-weather",
   "template": "full"
 }

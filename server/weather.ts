@@ -53,9 +53,23 @@ export async function getWeather(latitude: number, longitude: number): Promise<W
 
     const roundedHumidity: string = stationData.properties.relativeHumidity.value.toFixed(2);
 
+    // -------------------------------------------------------------------------------------------
+    // DATE FORMATTING
+    // -------------------------------------------------------------------------------------------
     const now = new Date();
-    const dateString = now.toISOString();
+    const year = now.getUTCFullYear();
+    const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const day = String(now.getUTCDate()).padStart(2, '0');
+    const hours = String(now.getUTCHours()).padStart(2, '0');
+    const minutes = String(now.getUTCMinutes()).padStart(2, '0');
 
+    // const dateString = `${year}-${month}-${day}_${hours}${minutes}UTC`;
+    const dateString = year + "-" + month + "-" + day + "_" + hours + minutes + "UTC";
+    DeskThing.sendLog("DATESTRING: " + dateString)
+
+    // -------------------------------------------------------------------------------------------
+    // PACKAGE CONSTRUCTION
+    // -------------------------------------------------------------------------------------------
     const ourWeatherData : WeatherData = {
       temperature: stationData.properties.temperature.value,
       temperature_scale: stationData.properties.temperature.unitCode,
