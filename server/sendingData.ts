@@ -74,23 +74,30 @@ export const sendDate = async () => {
     let settings: AppSettings | null = await DeskThing.getSettings();
     let settingsParse = await JSON.parse(JSON.stringify(settings));
 
-    let format = settingsParse.time_format.value;
+    let time_format = settingsParse.time_format.value;
     
-
-
+    // -------------------------------------------------------------------------------------------
+    // TIME CALCULATION
+    // -------------------------------------------------------------------------------------------
+    
     const now = new Date();
     let ampm = "";
 
     let hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, '0');
 
-    if (format === "12") {
+    if (time_format === "12") {
         ampm = hours >= 12 ? " PM" : " AM"; // before modifying hours, check the AM/PM
         hours = hours % 12;
         hours = hours || 12; // handle midnight (or hour 0)
     }
 
     const time_string: string = hours + ":" + minutes + ampm;
+
+    // -------------------------------------------------------------------------------------------
+    // DATE CALCULATION
+    // -------------------------------------------------------------------------------------------
+
 
     const data_to_send: ParsedDateData = {
         time: time_string,
