@@ -6,6 +6,7 @@ const App: React.FC = () => {
     const [temperature_data, setTemperatureData] = useState <string | null>(null);
     const [time_data, setTimeData] = useState<string | null>(null);
     const [date_data, setDateData] = useState<string | null>(null);
+    const [dotw_data, setDOTWData] = useState<string | null>(null);
     const [last_updated, setLastUpdated] = useState<string | null>(null);
     const [humidity, setHumidity] = useState<string | null>(null);
     const [wind, setWind] = useState<string | null>(null);
@@ -30,8 +31,9 @@ const App: React.FC = () => {
             console.log('Received date data from server!')
             try {
                 const parsed_date_data = JSON.parse(data.payload);
-                //setDateData(parsed_date_data.date);
                 setTimeData(parsed_date_data.time);
+                setDateData(parsed_date_data.date);
+                setDOTWData(parsed_date_data.dotw);
             } catch (error) {
                 console.error("Error parsing date JSON:", error);
             }
@@ -60,10 +62,22 @@ const App: React.FC = () => {
     return (
         <div className="bg-slate-800 w-screen h-screen flex flex-col"> 
             <div className="flex justify-between items-center"> 
-                <div className="text-white text-6xl font-bold p-8">
-                    {time_data && (
-                        <span>{time_data}</span>
-                    )}
+                <div className="flex flex-col items-end pt-16 pl-16">
+                    <div className="text-white text-6xl font-bold"> 
+                        {time_data && (
+                            <span>{time_data}</span>
+                        )}
+                    </div>
+                    <div className="text-white text-xl mt-2"> 
+                        {date_data && (
+                            <span>{date_data}</span> 
+                        )}
+                    </div>
+                    <div className="text-white text-xl mt-2"> 
+                        {dotw_data && (
+                            <span>{dotw_data}</span> 
+                        )}
+                    </div>
                 </div>
                 <div className="flex flex-col items-end pt-16 pr-16"> 
                     <div className="text-white text-6xl font-bold"> 

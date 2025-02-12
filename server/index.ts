@@ -24,8 +24,8 @@ const start = async () => {
   await setupSettings(settingsData);
   
   runEveryMin(sendDate);
-  runEveryMin(sendWeather); // TODO: change to hour once done debugging
-  //runEveryHour(sendWeather);
+  //runEveryMin(sendWeather); // TODO: change to hour once done debugging
+  runEveryHour(sendWeather);
 };
 
 const update = async () => {

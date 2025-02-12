@@ -70,6 +70,18 @@ export const setupSettings = async (Data: DataInterface | null) => {
           { label: "24 Hr", value: "24" },
         ]
       },
+      date_format: {
+        label: "Date Format",
+        value: "USA",
+        type: "select",
+        options: [
+          { label: "USA: MM/DD/YYYY", value: "USA" },
+          { label: "EUR: DD.MM.YYYY", value: "EUR" },
+          { label: "ISO: YYYY-MM-DD", value: "ISO" },
+          { label: "MDY: MONTH DD, YYYY", value: "MDY" },
+          { label: "DMY: DD MONTH, YYYY", value: "DMY" },
+        ]
+      },
     };
 
     // This adds the settings to the server. When the user changes a setting, the 'data' callback is triggered
